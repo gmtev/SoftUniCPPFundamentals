@@ -2,10 +2,13 @@
 #include <array>
 #include <iomanip>
 #include <vector>
+#include <climits>
+#include <cmath>
 using namespace std;
 
-// Zig-Zag Arrays
 static const int MAXSIZE = 99;
+
+// Zig-Zag Arrays
 
 int main() {
 
@@ -183,19 +186,133 @@ int main() {
 
 // Cartesian Product
 
+int main() {
+    int N;
+    cin >> N;
 
+    int numbers[MAXSIZE];
+
+    for (int i = 0; i < N; ++i) {
+        cin >> numbers[i];
+    }
+
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            cout << numbers[i] * numbers[j] << " ";
+        }
+    }
+
+    cout << endl;
+    return 0;
+}
 
 // Closest Numbers
 
+int main() {
+    int N;
+    cin >> N;
 
+    int numbers[MAXSIZE];
+
+    for (int cnt = 0; cnt < N; cnt++) {
+        cin >> numbers[cnt];
+    }
+
+    if (N == 1) {
+        cout << 0 << endl;
+        return 0;
+    }
+
+    int min_diff = INT_MAX;
+
+    for (int first = 0; first < N - 1; first++)
+        for (int second = first+1; second < N; second++) {
+            int diff = abs(numbers[first] - numbers[second]);
+            if (diff < min_diff) {
+                min_diff = diff;
+            }
+    }
+
+    cout << min_diff << endl;
+
+    return 0;
+}
 
 // Array Rotation
 
+int main() {
+    int N;
+    cin >> N;
 
+    int numbers[MAXSIZE];
+    for (int cnt = 0; cnt < N; cnt++) {
+        cin >> numbers[cnt];
+    }
+
+    int R;
+    cin >> R;
+
+    R = R % N;
+
+    for (int cnt = 0; cnt < N; cnt++) {
+        cout << numbers[(cnt + R) % N] << " ";
+    }
+
+    cout << endl;
+    return 0;
+}
 
 // Top Integers
 
+int main() {
+    int N;
+    cin >> N;
 
+    int numbers[MAXSIZE];
+    for (int cnt = 0; cnt < N; cnt++) {
+        cin >> numbers[cnt];
+    }
+
+    vector<int> topIntegers;
+    int maxRight = numbers[N - 1];
+    topIntegers.push_back(maxRight);
+
+    for (int cnt = N - 2; cnt >= 0; cnt--) {
+        if (numbers[cnt] > maxRight) {
+            topIntegers.push_back(numbers[cnt]);
+            maxRight = numbers[cnt];
+        }
+    }
+
+    for (int cnt = topIntegers.size() - 1; cnt >= 0; cnt--) {
+        cout << topIntegers[cnt] << " ";
+    }
+
+    cout << endl;
+    return 0;
+}
 
 // Magic Sum
 
+int main() {
+    int N;
+    cin >> N;
+
+    int numbers[MAXSIZE];
+    for (int cnt = 0; cnt < N; cnt++) {
+        cin >> numbers[cnt];
+    }
+
+    int magicSum;
+    cin >> magicSum;
+
+    for (int cnt = 0; cnt < N - 1; cnt++) {
+        for (int scnd = cnt + 1; scnd < N; scnd++) {
+            if (numbers[cnt] + numbers[scnd] == magicSum) {
+                cout << numbers[cnt] << " " << numbers[scnd] << endl;
+            }
+        }
+    }
+
+    return 0;
+}
