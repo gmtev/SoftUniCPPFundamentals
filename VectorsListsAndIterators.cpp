@@ -134,14 +134,106 @@ int main() {
 
 // Merging Lists
 
+list<int> readNumbersList(istream & inputStream) {
+    list<int> res;
+
+    string buffer;
+    getline(inputStream, buffer);
+
+    istringstream istr(buffer);
+
+    int tmp;
+    while(istr >> tmp)
+        res.push_back(tmp);
+    
+        return res;
+}
+
 int main() {
+
+    list<int> i1 = readNumbersList(cin);
+    list<int> i2 = readNumbersList(cin);
+
+    list<int> result;
+
+    list<int>::iterator i1iter = i1.begin();
+    list<int>::iterator i2iter = i2.begin();
+
+    while(i1iter != i1.end() || i2iter != i2.end()) {
+
+        if (i1iter != i1.end()) {
+            result.push_back(*i1iter);
+            i1iter++;
+        }
+
+        if (i2iter != i2.end()) {
+            result.push_back(*i2iter);
+            i2iter++;
+        }
+    }
+
+    for(int i : result)
+        cout << i << ' ' << flush;
+    cout << endl;
 
     return 0;
 }
 
 // Manipulations
 
+vector<int> readNumbersFinal(istream & inputStream) {
+    vector<int> res;
+
+    string buffer;
+    getline(inputStream, buffer);
+
+    istringstream istr(buffer);
+
+    int tmp;
+    while(istr >> tmp)
+        res.push_back(tmp);
+    
+        return res;
+}
+
 int main() {
+
+    vector<int> result = readNumbersFinal(cin);
+    while(true) {
+        string buffer;
+        getline(cin, buffer);
+
+        if (buffer == "end")
+            break;
+        
+            istringstream istr(buffer);
+
+            string command;
+            istr >> command;
+            int par1;
+            istr >> par1;
+
+            if (command == "Add") {
+                result.push_back(par1);
+            } else if (command == "Remove") {
+                vector<int>::iterator itFound = find(result.begin(), result.end(), par1);
+                if (itFound != result.end()) {
+                    result.erase(itFound);
+                }
+            } else if (command == "RemoveAt") {
+                result.erase(result.begin() + par1);
+            } else if (command == "Insert") {
+                int par2;
+                istr >> par2;
+                result.insert(result.begin() + par2, par1);
+            } else {
+                cout << "Error!" << endl;
+            }
+    }
+
+    for(int i : result)
+        cout << i << ' ' << flush;
+    cout << endl;
 
     return 0;
 }
